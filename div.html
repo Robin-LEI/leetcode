@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 400px;
+      height: 200px;
+      border: 1px solid red;
+      border-top-color: transparent;
+      position: relative;
+    }
+    .box::before {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 1px;
+      background-color: red;
+      position: absolute;
+      top: -1px;
+      left: -1px;
+    }
+    .box::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 1px;
+      background-color: red;
+      position: absolute;
+      right: -1px;
+      top: -1px;
+    }
+    .span {
+      position: relative;
+      top: -0.7em;
+      text-align: center;
+    }
+    .span::before {
+      content: '';
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 100%;
+      border: 1px solid red;
+      position: absolute;
+      left: 99.5px;
+      top: 0.35em;
+    }
+    .span::after {
+      content: '';
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 100%;
+      border: 1px solid red;
+      position: absolute;
+      right: 99px;
+      top: 0.35em;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="span">hello world!</div>
+  </div>
+</body>
+</html>

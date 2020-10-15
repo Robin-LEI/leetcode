@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 最长回文字符串
+    // 回文字符串是一个正读和反读都一样的字符串
+    /**
+     * bababd
+     * bab\aba
+     * 
+     * cbbd
+     * bb
+     **/
+    let str = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    // "xaabacxcabaax"
+    // "bacxcab"
+    let sum = ''
+    let temp = sum
+    function getIndex(s, char, idx) {
+      let str = s;
+      let index = str.substring(idx).indexOf(char); // 字符出现的位置
+      let num = 0; // 这个字符出现的次数
+      let nums = []
+      console.time(3)
+      while(index !== -1) {
+          num++; // 每出现一次 次数加一
+          if (index >= idx) {
+            nums.push(index)
+          }
+          index = str.indexOf(char,index + 1); // 从字符串出现的位置的下一位置开始继续查找
+      }
+      console.timeEnd(3)
+      console.log(nums)
+      return nums
+    }
+    console.time(1)
+    for (let i = 0; i < str.length; i++) {
+      if (str.split('').reverse().join('') !== str) {
+        let arr = getIndex(str, str[i], i)
+        console.time(2)
+        for (let j = 0; j < arr.length; j++) {
+          if (arr[j] >= i) {
+            temp = str.substring(i, str.substring(arr[j] + 1).indexOf(str[i]) + 1 + arr[j] + 1)
+            if (temp.length > sum.length) {
+              if (temp.split('').reverse().join('') === temp) {
+                sum = temp
+              }
+            }
+          }
+        }
+        console.timeEnd(2)
+      } else {
+        sum = str
+        break
+      }
+    }
+    console.timeEnd(1)
+    console.log(sum)
+  </script>
+</body>
+</html>
