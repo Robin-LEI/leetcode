@@ -1,17 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>字符串全排列</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Full Permutation(Recursive Swap) - Mengliao Software</title>
 </head>
 
 <body>
-  <script>
-    // 比如 字符串 abc
-    // 全排列的结果就是 3! 6种结果
-    // 递归
+  <p>Full Permutation(Recursive Swap)<br />
+    Mengliao Software Studio - Bosun Network Co., Ltd.<br />
+    2011.05.24</p>
+  <script type="text/javascript">
+    /*  
+    全排列（递归交换）算法  
+    1、将第一个位置分别放置各个不同的元素；  
+    2、对剩余的位置进行全排列（递归）；  
+    3、递归出口为只对一个元素进行全排列。  
+    */
     function swap(arr, i, j) {
       if (i != j) {
         var temp = arr[i];
@@ -19,14 +23,14 @@
         arr[j] = temp;
       }
     }
-
+    var count = 0;
+    let result = [];
     function show(arr, result) {
       return result.push(arr.join(''));
     }
-    
-    function Permutation(str) {
+    function perm(arr) {
       let result = [];
-      let arr = str.split('');
+      arr = arr.split('');
       // 默认n为0，从头开始
       (function fn(n) { //为第n个位置选择元素  
         for (var i = n; i < arr.length; i++) {
@@ -40,8 +44,8 @@
       })(0);
       return result;
     }
-
-    console.log(Permutation('abc'))
+    
+    console.log(perm('abc'));  
   </script>
 </body>
 
