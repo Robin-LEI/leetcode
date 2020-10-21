@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>字符串全排列</title>
+</head>
+
+<body>
+  <script>
+    let str = 'abc';
+    let result = [];
+
+    function insertStr(soure, start, newStr) {
+      return soure.slice(0, start) + newStr + soure.slice(start);
+    }
+
+    for (let i = 0; i < str.length; i++) {
+      let char = str[i];
+      let rest = str.slice(0, i) + str.slice(i + 1, str.length);
+      arr = rest.split('');
+
+      for (let k = 0; k < str.length; k++) {
+        arr.splice(k, 0, char);
+        result.push(arr.join(''));
+      }
+    }
+
+    console.log(result)
+  </script>
+</body>
+
+</html>
