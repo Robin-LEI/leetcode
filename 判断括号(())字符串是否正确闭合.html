@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>检测括号是否正确闭合</title>
+</head>
+<body>
+  <script>
+    function isRight(arr) {
+      let result = [];
+      for (let i = 0; i < arr.length; i++) {
+        let stack = [];
+        let str = arr[i];
+        for (let k = 0; k < str.length; k++) {
+          if (stack.length) {
+            if (stack[stack.length - 1] === '(' && str[k] === ')') {
+              stack.pop();
+            } else {
+              stack.push(str[k]);
+            }
+          } else {
+            stack.push(str[k]);
+          }
+        }
+        if (!stack.length) {
+          result.push(arr[i]);
+        }
+      }
+      // return Array.from(new Set(result));
+      return result;
+    }
+    let arr = ['(())','((((', ')(()','()()', '()()()','((()))', '()(())', '(())()', ')()('];
+    console.log(isRight(arr));
+  </script>
+</body>
+</html>
