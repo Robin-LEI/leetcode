@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>字符串全排列</title>
+</head>
+
+<body>
+  <script>
+    // 比如 字符串 abc
+    // 全排列的结果就是 3! 6种结果
+    // 递归
+    function swap(arr, i, j) {
+      if (i != j) {
+        var temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+      }
+    }
+
+    function show(arr, result) {
+      return result.push(arr.join(''));
+    }
+    
+    function Permutation(str) {
+      let result = [];
+      let arr = str.split('');
+      // 默认n为0，从头开始
+      (function fn(n) { //为第n个位置选择元素  
+        for (var i = n; i < arr.length; i++) {
+          swap(arr, i, n);
+          if (n + 1 < arr.length - 1) //判断数组中剩余的待全排列的元素是否大于1个  
+            fn(n + 1); //从第n+1个下标进行全排列  
+          else
+            show(arr, result); //显示一组结果  
+          swap(arr, i, n);
+        }
+      })(0);
+      return result;
+    }
+
+    console.log(Permutation('abc'))
+  </script>
+</body>
+
+</html>

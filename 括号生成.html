@@ -1,23 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>括号生成</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>括号生成</title>
 </head>
+
 <body>
-  <script>
-    // 数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
-    /**
-     * 输入：n = 3
-     * [
-       "((()))",
-       "(()())",
-       "(())()",
-       "()(())",
-       "()()()"
-     ]
-     * */
-  </script>
+  <script>
+    // 数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
+    /**
+     * n = 3
+     [
+       "((()))",
+       "(()())",
+       "(())()",
+       "()(())",
+       "()()()"
+     ]
+     **/
+    // 求一个字符串的全排列
+    function perm(s) {
+      let result = [];
+      if (s.length <= 1) {
+        return [s];
+      } else {
+        for (let i = 0; i < s.length; i++) {
+          let c = s[i];
+          let newStr = s.slice(0, i) + s.slice(i + 1, s.length);
+          let l = perm(newStr);
+
+          for (let j = 0; j < l.length; j++) {
+            let tmp = c + l[j];
+            result.push(tmp);
+          }
+        }
+      }
+      result = Array.from(new Set(result));
+      return result;
+    };
+    function _filter(result = []) {
+      let filters = [];
+      result.forEach(key => {
+        let arr = key.split('');
+        let stack = [];
+        arr.forEach((bracket, index) => {
+          if (!stack.length) {
+            stack.push(bracket);
+          } else {
+            if (stack[index - 1] === '(' && arr[index] === ')') { // 可以消除
+              console.log(888, stack)
+              stack.splice(index - 1, index + 1);
+              console.log(999, stack)
+            } else {
+              stack.push(bracket);
+              console.log(1010, stack)
+            }
+          }
+        });
+        console.log(stack)
+        if (!stack.length) {
+          filters.push(key);
+        }
+      });
+      console.log(filters)
+    }
+    function generateParenthesis(n) {
+      let str = '';
+      str += '('.repeat(n) + ')'.repeat(n); // ((()))
+      //  第一个是 (
+      // 最后一个肯定是 )
+      // '(', '(', ')', ')' 随机组合
+      // 类似于 'a','b','c','d'四个字符的随机组合
+      let str2 = str.slice(1, -1);
+      let perms = perm(str2);
+      let perms2 = _filter(perms)
+      console.log(perms2)
+    }
+    console.log(generateParenthesis(3))
+  </script>
 </body>
+
 </html>
